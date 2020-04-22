@@ -39,7 +39,7 @@ setup(
     # *IMPORTANT*: Don't manually change the version here. Use `make bump`, as described in readme
     version='0.1.0',
     description="""platon-account: Sign PlatON transactions and messages with local private keys""",
-    long_description_markdown_filename='README.md',
+    # long_description_markdown_filename='README.md',
     author='awake006',
     author_email='hietel366435@gmail.com',
     url='https://github.com/awake006/platon-account',
