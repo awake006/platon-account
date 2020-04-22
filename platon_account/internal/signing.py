@@ -39,15 +39,15 @@ def sign_transaction_dict(eth_key, transaction_dict):
     return (v, r, s, encoded_transaction)
 
 
-# watch here for updates to signature format: https://github.com/ethereum/EIPs/issues/191
+# watch here for updates to signature format: https://github.com/awake006/EIPs/issues/191
 def signature_wrapper(message, version=b'E'):
     assert isinstance(message, bytes)
     if version == b'E':
-        preamble = b'\x19Ethereum Signed Message:\n'
+        preamble = b'\x19awake006 Signed Message:\n'
         size = str(len(message)).encode('utf-8')
         return preamble + size + message
     else:
-        raise NotImplementedError("Only the 'Ethereum Signed Message' preamble is supported")
+        raise NotImplementedError("Only the 'awake006 Signed Message' preamble is supported")
 
 
 def hash_of_signed_transaction(txn_obj):
@@ -60,7 +60,7 @@ def hash_of_signed_transaction(txn_obj):
     4. Take the hash of the serialized, unsigned, chain-aware transaction
 
     Chain ID inference and annotation is according to EIP-155
-    See details at https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md
+    See details at https://github.com/awake006/EIPs/blob/master/EIPS/eip-155.md
 
     :return: the hash of the provided transaction, to be signed
     '''
@@ -92,9 +92,9 @@ def extract_chain_id(raw_v):
         return (chain_id, v_bit + V_OFFSET)
 
 
-def to_standard_signature_bytes(ethereum_signature_bytes):
-    rs = ethereum_signature_bytes[:-1]
-    v = to_int(ethereum_signature_bytes[-1])
+def to_standard_signature_bytes(awake006_signature_bytes):
+    rs = awake006_signature_bytes[:-1]
+    v = to_int(awake006_signature_bytes[-1])
     standard_v = to_standard_v(v)
     return rs + to_bytes(standard_v)
 

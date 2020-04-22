@@ -1,18 +1,18 @@
 Metadata-Version: 1.2
 Name: platon-account
-Version: 0.3.0
-Summary: platon-account: Sign Ethereum transactions and messages with local private keys
-Home-page: https://github.com/ethereum/platon-account
-Author: Jason Carver
-Author-email: ethcalibur+pip@gmail.com
+Version: 0.1.0
+Summary: platon-account: Sign PlatON transactions and messages with local private keys
+Home-page: https://github.com/awake006/platon-account
+Author: awake006
+Author-email: hietel366435@gmail.com
 License: MIT
 Description: platon-account
         ===========
         
-        |Join the chat at https://gitter.im/ethereum/platon-account| |Build Status|
+        |Join the chat at https://gitter.im/awake006/platon-account| |Build Status|
         |PyPI version| |Python versions| |Docs build|
         
-        Sign Ethereum transactions and messages with local private keys
+        Sign PlatON transactions and messages with local private keys
         
         Read more in the `documentation on
         ReadTheDocs <http://platon-account.readthedocs.io/>`__. `View the change
@@ -27,10 +27,7 @@ Description: platon-account
         
         Developer setup
         ---------------
-        
-        If you would like to hack on platon-account, please check out the `Ethereum
-        Development Tactical
-        Manual <https://github.com/pipermerriam/ethereum-dev-tactical-manual>`__
+
         for information on how we do:
         
         -  Testing
@@ -46,7 +43,7 @@ Description: platon-account
         .. code:: sh
         
         
-            git clone git@github.com:ethereum/platon-account.git
+            git clone git@github.com:awake006/platon-account.git
             cd platon-account
             virtualenv -p python3 venv
             . venv/bin/activate
@@ -112,10 +109,10 @@ Description: platon-account
         the new version explicitly, like
         ``make release bump="--new-version 4.0.0-alpha.1 devnum"``
         
-        .. |Join the chat at https://gitter.im/ethereum/platon-account| image:: https://badges.gitter.im/ethereum/platon-account.svg
-           :target: https://gitter.im/ethereum/platon-account?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-        .. |Build Status| image:: https://circleci.com/gh/ethereum/platon-account.svg?style=shield
-           :target: https://circleci.com/gh/ethereum/platon-account
+        .. |Join the chat at https://gitter.im/awake006/platon-account| image:: https://badges.gitter.im/awake006/platon-account.svg
+           :target: https://gitter.im/awake006/platon-account?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+        .. |Build Status| image:: https://circleci.com/gh/awake006/platon-account.svg?style=shield
+           :target: https://circleci.com/gh/awake006/platon-account
         .. |PyPI version| image:: https://badge.fury.io/py/platon-account.svg
            :target: https://badge.fury.io/py/platon-account
         .. |Python versions| image:: https://img.shields.io/pypi/pyversions/platon-account.svg
@@ -123,7 +120,7 @@ Description: platon-account
         .. |Docs build| image:: https://readthedocs.org/projects/platon-account/badge/?version=latest
            :target: http://platon-account.readthedocs.io/en/latest/?badge=latest
         
-Keywords: ethereum
+Keywords: awake006
 Platform: UNKNOWN
 Classifier: Development Status :: 3 - Alpha
 Classifier: Intended Audience :: Developers

@@ -11,11 +11,11 @@ from platon_keyfile import (
     create_keyfile_json,
     decode_keyfile_json,
 )
-from eth_keys import (
+from platon_keys import (
     KeyAPI,
     keys,
 )
-from eth_keys.exceptions import (
+from platon_keys.exceptions import (
     ValidationError,
 )
 from eth_utils.curried import (
@@ -52,9 +52,9 @@ from platon_account.signers.local import (
 
 class Account(object):
     '''
-    This is the primary entry point for working with Ethereum private keys.
+    This is the primary entry point for working with awake006 private keys.
 
-    It does **not** require a connection to an Ethereum node.
+    It does **not** require a connection to an awake006 node.
     '''
     _keys = keys
 
@@ -87,7 +87,7 @@ class Account(object):
     @staticmethod
     def decrypt(keyfile_json, password):
         '''
-        Decrypts a private key that was encrypted using an Ethereum client or
+        Decrypts a private key that was encrypted using an awake006 client or
         :meth:`~Account.encrypt`.
 
         :param keyfile_json: The encrypted key
@@ -130,12 +130,12 @@ class Account(object):
     def encrypt(private_key, password):
         '''
         Creates a dictionary with an encrypted version of your private key.
-        To import this keyfile into Ethereum clients like geth and parity:
+        To import this keyfile into awake006 clients like geth and parity:
         encode this dictionary with :func:`json.dumps` and save it to disk where your
         client keeps key files.
 
         :param private_key: The raw private key
-        :type private_key: hex str, bytes, int or :class:`eth_keys.datatypes.PrivateKey`
+        :type private_key: hex str, bytes, int or :class:`platon_keys.datatypes.PrivateKey`
         :param str password: The password which you will need to unlock the account in your client
         :returns: The data to use in your encrypted file
         :rtype: dict
@@ -179,7 +179,7 @@ class Account(object):
         Returns a convenient object for working with the given private key.
 
         :param private_key: The raw private key
-        :type private_key: hex str, bytes, int or :class:`eth_keys.datatypes.PrivateKey`
+        :type private_key: hex str, bytes, int or :class:`platon_keys.datatypes.PrivateKey`
         :return: object with methods for signing and encrypting
         :rtype: LocalAccount
 
@@ -302,7 +302,7 @@ class Account(object):
         *(The default is fine for most users)*
 
         :param backend: any backend that works in
-            `eth_keys.KeyApi(backend) <https://github.com/ethereum/eth-keys/#keyapibackendnone>`_
+            `platon_keys.KeyApi(backend) <https://github.com/awake006/eth-keys/#keyapibackendnone>`_
 
         '''
         self._keys = KeyAPI(backend)
@@ -326,7 +326,7 @@ class Account(object):
         :param message_hash: the 32-byte message hash to be signed
         :type message_hash: hex str, bytes or int
         :param private_key: the key to sign the message with
-        :type private_key: hex str, bytes, int or :class:`eth_keys.datatypes.PrivateKey`
+        :type private_key: hex str, bytes, int or :class:`platon_keys.datatypes.PrivateKey`
         :returns: Various details about the signature - most
           importantly the fields: v, r, and s
         :rtype: ~platon_account.datastructures.AttributeDict
@@ -384,7 +384,7 @@ class Account(object):
         :param dict transaction_dict: the transaction with keys:
           nonce, chainId, to, data, value, gas, and gasPrice.
         :param private_key: the private key to sign the data with
-        :type private_key: hex str, bytes, int or :class:`eth_keys.datatypes.PrivateKey`
+        :type private_key: hex str, bytes, int or :class:`platon_keys.datatypes.PrivateKey`
         :returns: Various details about the signature - most
           importantly the fields: v, r, and s
         :rtype: AttributeDict
@@ -447,13 +447,13 @@ class Account(object):
     @combomethod
     def _parsePrivateKey(self, key):
         '''
-        Generate a :class:`eth_keys.datatypes.PrivateKey` from the provided key. If the
-        key is already of type :class:`eth_keys.datatypes.PrivateKey`, return the key.
+        Generate a :class:`platon_keys.datatypes.PrivateKey` from the provided key. If the
+        key is already of type :class:`platon_keys.datatypes.PrivateKey`, return the key.
 
-        :param key: the private key from which a :class:`eth_keys.datatypes.PrivateKey`
+        :param key: the private key from which a :class:`platon_keys.datatypes.PrivateKey`
                     will be generated
-        :type key: hex str, bytes, int or :class:`eth_keys.datatypes.PrivateKey`
-        :returns: the provided key represented as a :class:`eth_keys.datatypes.PrivateKey`
+        :type key: hex str, bytes, int or :class:`platon_keys.datatypes.PrivateKey`
+        :returns: the provided key represented as a :class:`platon_keys.datatypes.PrivateKey`
         '''
         if isinstance(key, self._keys.PrivateKey):
             return key

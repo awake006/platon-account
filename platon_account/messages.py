@@ -20,7 +20,7 @@ def defunct_hash_message(primitive=None, hexstr=None, text=None):
     This provides the same prefix and hashing approach as
     :meth:`w3.eth.sign() <web3.eth.Eth.sign>`. That means that the
     message will automatically be prepended with text
-    defined in EIP-191 as version 'E': ``b'\\x19Ethereum Signed Message:\\n'``
+    defined in EIP-191 as version 'E': ``b'\\x19awake006 Signed Message:\\n'``
     concatenated with the number of bytes in the message.
 
     Awkwardly, the number of bytes in the message is encoded in decimal ascii. So

@@ -25,12 +25,12 @@ class LocalAccount(BaseAccount):
     '''
     def __init__(self, key, account):
         '''
-        :param eth_keys.PrivateKey key: to prefill in private key execution
+        :param platon_keys.PrivateKey key: to prefill in private key execution
         :param web3.account.Account account: the key-unaware management API
         '''
         self._publicapi = account
 
-        self._address = key.public_key.to_checksum_address()
+        self._address = key.public_key.to_bech32_address()
 
         key_raw = key.to_bytes()
         self._privateKey = key_raw
