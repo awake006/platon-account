@@ -23,14 +23,18 @@ class LocalAccount(BaseAccount):
         >>> bytes(my_local_account)
         b"\\x01\\x23..."
     '''
-    def __init__(self, key, account):
+
+    def __init__(self, key, account, net="mainnet"):
         '''
         :param platon_keys.PrivateKey key: to prefill in private key execution
         :param web3.account.Account account: the key-unaware management API
         '''
         self._publicapi = account
 
-        self._address = key.public_key.to_bech32_address()
+        addr_dict = {"MAINNET": key.public_key.to_bech32_address(),
+                     "TESTNET": key.public_key.to_bech32_test_address()}
+
+        self._address = addr_dict[net.upper()]
 
         key_raw = key.to_bytes()
         self._privateKey = key_raw

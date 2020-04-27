@@ -22,34 +22,25 @@ from eth_utils.curried import (
     is_string,
     to_bytes,
     to_int,
-    to_checksum_address,
 )
-
-from eth_utils import encode_hex
 import rlp
 from rlp.sedes import (
-    Binary,
     big_endian_int,
     binary,
 )
-from platon_keys.utils.bech32 import decode
-from platon_keys.utils.address import HRP
 
 
-def bech32_to_address(val):
+def rlp_bech32_address(val):
     if not is_empty_or_checksum_address(val):
         try:
-            witver, program = decode(HRP, val)
-            addr = to_checksum_address(encode_hex(bytes(program)))
-            # addr = bytes(program)
-            return addr
+            return rlp.encode(val)
         except Exception as e:
             raise e
     return val
 
 
 def modify_address(transaction_dict):
-    return dict(transaction_dict, to=bech32_to_address(transaction_dict.get("to")))
+    return dict(transaction_dict, to=rlp_bech32_address(transaction_dict.get("to")))
 
 
 def serializable_unsigned_transaction_from_dict(transaction_dict):
@@ -125,7 +116,7 @@ TRANSACTION_VALID_VALUES = {
     'nonce': is_int_or_prefixed_hexstr,
     'gasPrice': is_int_or_prefixed_hexstr,
     'gas': is_int_or_prefixed_hexstr,
-    'to': is_empty_or_checksum_address,
+    # 'to': is_empty_or_checksum_address,
     'value': is_int_or_prefixed_hexstr,
     'data': lambda val: isinstance(val, (int, str, bytes, bytearray)),
     'chainId': lambda val: val is None or is_int_or_prefixed_hexstr(val),
@@ -180,7 +171,7 @@ UNSIGNED_TRANSACTION_FIELDS = (
     ('nonce', big_endian_int),
     ('gasPrice', big_endian_int),
     ('gas', big_endian_int),
-    ('to', Binary.fixed_length(20, allow_empty=True)),
+    ('to', binary),
     ('value', big_endian_int),
     ('data', binary),
 )

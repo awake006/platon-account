@@ -59,7 +59,7 @@ class Account(object):
     _keys = keys
 
     @combomethod
-    def create(self, extra_entropy=''):
+    def create(self, extra_entropy='', net="mainnet"):
         '''
         Creates a new private key, and returns it as a :class:`~platon_account.local.LocalAccount`.
 
@@ -82,7 +82,7 @@ class Account(object):
         '''
         extra_key_bytes = text_if_str(to_bytes, extra_entropy)
         key_bytes = keccak(os.urandom(32) + extra_key_bytes)
-        return self.privateKeyToAccount(key_bytes)
+        return self.privateKeyToAccount(key_bytes, net)
 
     @staticmethod
     def decrypt(keyfile_json, password):
@@ -174,7 +174,7 @@ class Account(object):
         return create_keyfile_json(key_bytes, password_bytes)
 
     @combomethod
-    def privateKeyToAccount(self, private_key):
+    def privateKeyToAccount(self, private_key, net="mainnet"):
         '''
         Returns a convenient object for working with the given private key.
 
@@ -197,7 +197,7 @@ class Account(object):
             # but without the private key argument
         '''
         key = self._parsePrivateKey(private_key)
-        return LocalAccount(key, self)
+        return LocalAccount(key, self, net)
 
     @combomethod
     def recoverHash(self, message_hash, vrs=None, signature=None):
@@ -465,3 +465,8 @@ class Account(object):
                 "The private key must be exactly 32 bytes long, instead of "
                 "%d bytes." % len(key)
             ) from original_exception
+
+
+if __name__ == '__main__':
+    account = Account().create(net="testnet")
+    print(account.address)
