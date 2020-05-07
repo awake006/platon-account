@@ -29,18 +29,24 @@ from rlp.sedes import (
     binary,
 )
 
+from platon_keys.utils.address import MIANNETHRP, TESTNETHRP
+from platon_keys.utils.bech32 import decode
 
-def rlp_bech32_address(val):
+
+def bech32_address_bytes(val):
     if not is_empty_or_checksum_address(val):
-        try:
-            return rlp.encode(val)
-        except Exception as e:
-            raise e
+        if val[0:3] == MIANNETHRP:
+            _, result = decode(MIANNETHRP, val)
+        elif val[0:3] == TESTNETHRP:
+            _, result = decode(TESTNETHRP, val)
+        else:
+            raise ValueError(val)
+        val = bytes(result)
     return val
 
 
 def modify_address(transaction_dict):
-    return dict(transaction_dict, to=rlp_bech32_address(transaction_dict.get("to")))
+    return dict(transaction_dict, to=bech32_address_bytes(transaction_dict.get("to")))
 
 
 def serializable_unsigned_transaction_from_dict(transaction_dict):
